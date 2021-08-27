@@ -1,0 +1,12 @@
+D:\TrexProject\IotProject\IotProject.Entities\bin\Debug\net5.0\IotProject.Entities.deps.json
+D:\TrexProject\IotProject\IotProject.Entities\bin\Debug\net5.0\IotProject.Entities.dll
+D:\TrexProject\IotProject\IotProject.Entities\bin\Debug\net5.0\ref\IotProject.Entities.dll
+D:\TrexProject\IotProject\IotProject.Entities\bin\Debug\net5.0\IotProject.Entities.pdb
+D:\TrexProject\IotProject\IotProject.Entities\obj\Debug\net5.0\IotProject.Entities.csproj.AssemblyReference.cache
+D:\TrexProject\IotProject\IotProject.Entities\obj\Debug\net5.0\IotProject.Entities.GeneratedMSBuildEditorConfig.editorconfig
+D:\TrexProject\IotProject\IotProject.Entities\obj\Debug\net5.0\IotProject.Entities.AssemblyInfoInputs.cache
+D:\TrexProject\IotProject\IotProject.Entities\obj\Debug\net5.0\IotProject.Entities.AssemblyInfo.cs
+D:\TrexProject\IotProject\IotProject.Entities\obj\Debug\net5.0\IotProject.Entities.csproj.CoreCompileInputs.cache
+D:\TrexProject\IotProject\IotProject.Entities\obj\Debug\net5.0\IotProject.Entities.dll
+D:\TrexProject\IotProject\IotProject.Entities\obj\Debug\net5.0\ref\IotProject.Entities.dll
+D:\TrexProject\IotProject\IotProject.Entities\obj\Debug\net5.0\IotProject.Entities.pdb

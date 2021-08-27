@@ -1,0 +1,17 @@
+D:\TrexProject\IotProject\IotProject.Business\bin\Debug\net5.0\IotProject.Business.deps.json
+D:\TrexProject\IotProject\IotProject.Business\bin\Debug\net5.0\IotProject.Business.dll
+D:\TrexProject\IotProject\IotProject.Business\bin\Debug\net5.0\ref\IotProject.Business.dll
+D:\TrexProject\IotProject\IotProject.Business\bin\Debug\net5.0\IotProject.Business.pdb
+D:\TrexProject\IotProject\IotProject.Business\bin\Debug\net5.0\IotProject.DataAccess.dll
+D:\TrexProject\IotProject\IotProject.Business\bin\Debug\net5.0\IotProject.Entities.dll
+D:\TrexProject\IotProject\IotProject.Business\bin\Debug\net5.0\IotProject.DataAccess.pdb
+D:\TrexProject\IotProject\IotProject.Business\bin\Debug\net5.0\IotProject.Entities.pdb
+D:\TrexProject\IotProject\IotProject.Business\obj\Debug\net5.0\IotProject.Business.csproj.AssemblyReference.cache
+D:\TrexProject\IotProject\IotProject.Business\obj\Debug\net5.0\IotProject.Business.GeneratedMSBuildEditorConfig.editorconfig
+D:\TrexProject\IotProject\IotProject.Business\obj\Debug\net5.0\IotProject.Business.AssemblyInfoInputs.cache
+D:\TrexProject\IotProject\IotProject.Business\obj\Debug\net5.0\IotProject.Business.AssemblyInfo.cs
+D:\TrexProject\IotProject\IotProject.Business\obj\Debug\net5.0\IotProject.Business.csproj.CoreCompileInputs.cache
+D:\TrexProject\IotProject\IotProject.Business\obj\Debug\net5.0\IotProject.Business.csproj.CopyComplete
+D:\TrexProject\IotProject\IotProject.Business\obj\Debug\net5.0\IotProject.Business.dll
+D:\TrexProject\IotProject\IotProject.Business\obj\Debug\net5.0\ref\IotProject.Business.dll
+D:\TrexProject\IotProject\IotProject.Business\obj\Debug\net5.0\IotProject.Business.pdb
