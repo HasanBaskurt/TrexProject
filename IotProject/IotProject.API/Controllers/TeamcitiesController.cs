@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace IotProject.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class TeamcitiesController : ControllerBase
     {
@@ -22,6 +22,7 @@ namespace IotProject.API.Controllers
         }
 
         [HttpGet]
+        [Route("BuildLog")]
         public List<Teamcity> Get()
         {
             return _teamcityService.GetAllTeamcity();
@@ -29,7 +30,8 @@ namespace IotProject.API.Controllers
 
         
         [HttpPost]
-        public Teamcity Post([FromBody]Teamcity teamcity)
+        [Route("BuildLog")]
+        public Teamcity Post([FromBody] Teamcity teamcity)
         {
             return _teamcityService.CreateTeamcity(teamcity);
         }
