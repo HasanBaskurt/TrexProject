@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\TrexProject\RaspberryAPI\RaspberryAPI\bin\Release\net5.0\publish\</_PublishTargetUrl>
+    <History>True|2021-08-30T17:18:17.8013932Z;True|2021-08-30T20:12:27.3297384+03:00;True|2021-08-30T20:04:24.1026385+03:00;True|2021-08-30T20:04:05.2215849+03:00;True|2021-08-30T19:55:54.7430233+03:00;True|2021-08-30T19:48:44.3813798+03:00;True|2021-08-30T19:41:46.1103582+03:00;True|2021-08-30T18:45:42.1331421+03:00;True|2021-08-30T18:40:19.2260308+03:00;True|2021-08-30T17:20:26.6964011+03:00;True|2021-08-29T21:05:23.9497886+03:00;True|2021-08-29T19:46:20.2878361+03:00;True|2021-08-29T19:39:28.2771408+03:00;True|2021-08-29T19:27:24.4303491+03:00;True|2021-08-29T19:27:16.8472513+03:00;True|2021-08-29T19:19:20.5370576+03:00;</History>
+  </PropertyGroup>
+</Project>

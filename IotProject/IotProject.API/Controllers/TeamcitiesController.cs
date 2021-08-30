@@ -33,7 +33,51 @@ namespace IotProject.API.Controllers
         [Route("BuildLog")]
         public Teamcity Post([FromBody] Teamcity teamcity)
         {
+            if(teamcity.build_result== "failure")
+            {
+                // sürekli failure rengini yak
+            }
+            else if (teamcity.build_result == "success")
+            {
+                // sürekli success rengini yak
+            }
+            else if (teamcity.build_result == "running")
+            {
+                // sürekli aç kapa rgb success rengini 1 sn aralıkla
+            }
+
             return _teamcityService.CreateTeamcity(teamcity);
         }
+
+        /*
+        class Color
+        {
+            public string name { get; set; }
+        }
+
+
+        [HttpPost]
+        [Route("led")]
+        public Color Post([FromBody] Color color)
+        {
+            if(color.name == "green")
+            {
+                ledyak("green");
+            }
+            else
+            {
+                ledyak("red");
+            }
+
+            // color : red || green
+            return color;
+        }
+
+        public void ledyak(String color)
+        {
+            // raspide kaldırılan api ' a istek atılacak
+        }
+        */
+
     }
 }
