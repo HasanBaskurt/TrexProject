@@ -3,9 +3,12 @@ using IotProject.Business.Concrete;
 using IotProject.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace IotProject.API.Controllers
@@ -15,10 +18,13 @@ namespace IotProject.API.Controllers
     public class TeamcitiesController : ControllerBase
     {
         private ITeamcityService _teamcityService;
-
+        HttpClient httpClient; //yeni
+        StringContent content; //yeni
         public TeamcitiesController(ITeamcityService teamcityService)
         {
             _teamcityService = teamcityService;
+            httpClient = new HttpClient(); //yeni
+            content = new StringContent(JsonConvert.SerializeObject(""), Encoding.UTF8, "application/json");
         }
 
         [HttpGet]
@@ -33,17 +39,19 @@ namespace IotProject.API.Controllers
         [Route("BuildLog")]
         public Teamcity Post([FromBody] Teamcity teamcity)
         {
+            
             if(teamcity.build_result== "failure")
             {
-                // sürekli failure rengini yak
+                httpClient.PostAsync("http://192.168.1.125:8080/api/kirmizi", content);
             }
             else if (teamcity.build_result == "success")
             {
-                // sürekli success rengini yak
+                httpClient.PostAsync("http://192.168.1.125:8080/api/yesil", content);
+
             }
             else if (teamcity.build_result == "running")
             {
-                // sürekli aç kapa rgb success rengini 1 sn aralıkla
+                httpClient.PostAsync("http://192.168.1.125:8080/api/run", content);
             }
 
             return _teamcityService.CreateTeamcity(teamcity);

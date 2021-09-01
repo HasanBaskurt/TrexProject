@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Device.Gpio;
-
 namespace RaspberryAPI.Controllers
 {
     [Route("api")]
@@ -19,7 +18,7 @@ namespace RaspberryAPI.Controllers
         {
             return "Hello World";
         }
-
+        
         [HttpPost]
         [Route("yesil")]
         public void LedYesilPost()
@@ -41,7 +40,12 @@ namespace RaspberryAPI.Controllers
         {
             business.LedMavi();
         }
-
+        [HttpPost]
+        [Route("run")]
+        public void LedRunPost()
+        {
+            business.LedRun();
+        }
         [HttpPost]
         [Route("kapat")]
         public void LedKapatPost()

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Device.Gpio;
 using System.Threading;
 
+using System.Net.Http;
 namespace RaspberryAPI
 {
     public class Business
@@ -13,7 +14,8 @@ namespace RaspberryAPI
         int pin2 = 3;
         int pin3 = 4;
         GpioController controller = new GpioController();
-        
+
+
         public Business()
         {
             Console.WriteLine("Hello Raspberry!");
@@ -21,6 +23,7 @@ namespace RaspberryAPI
             controller.OpenPin(pin2, PinMode.Output);
             controller.OpenPin(pin3, PinMode.Output);
         }
+        
         public void LedYesil()
         {
             controller.Write(pin1, PinValue.High);
@@ -33,11 +36,19 @@ namespace RaspberryAPI
             controller.Write(pin2, PinValue.High);
             controller.Write(pin3, PinValue.Low);
         }
+
         public void LedMavi()
+        {
+            controller.Write(pin1, PinValue.Low);
+            controller.Write(pin2, PinValue.Low);
+            controller.Write(pin3, PinValue.High);
+        }
+
+        public void LedRun()
         {
             controller.Write(pin2, PinValue.Low);
             controller.Write(pin1, PinValue.Low);
-            for (int i=0;i<5;i++)
+            for (int i = 0; i < 5;i++) 
             {
                 controller.Write(pin3, PinValue.High);
                 Thread.Sleep(1000);
