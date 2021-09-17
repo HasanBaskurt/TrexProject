@@ -42,20 +42,57 @@ namespace IotProject.API.Controllers
             
             if(teamcity.build_result== "failure")
             {
-                httpClient.PostAsync("http://192.168.1.125:8080/api/kirmizi", content);
+                httpClient.PostAsync("http://192.168.1.125:8080/api/close", content);
+                httpClient.PostAsync("http://192.168.1.125:8080/api/red", content);
             }
             else if (teamcity.build_result == "success")
             {
-                httpClient.PostAsync("http://192.168.1.125:8080/api/yesil", content);
+                httpClient.PostAsync("http://192.168.1.125:8080/api/close", content);
+                httpClient.PostAsync("http://192.168.1.125:8080/api/green", content);
 
             }
             else if (teamcity.build_result == "running")
             {
+                httpClient.PostAsync("http://192.168.1.125:8080/api/close", content);
                 httpClient.PostAsync("http://192.168.1.125:8080/api/run", content);
             }
 
             return _teamcityService.CreateTeamcity(teamcity);
         }
+
+        [HttpPost]
+        [Route("green")]
+        public void PostGreen()
+        {
+                httpClient.PostAsync("http://192.168.1.125:8080/api/green", content);
+        }
+
+        [HttpPost]
+        [Route("red")]
+        public void PostRed()
+        {
+              httpClient.PostAsync("http://192.168.1.125:8080/api/red", content);
+        }
+
+        [HttpPost]
+        [Route("blue")]
+        public void PostBlue()
+        {
+                httpClient.PostAsync("http://192.168.1.125:8080/api/blue", content);
+        }
+
+        [HttpPost]
+        [Route("close")]
+        public void PostClose()
+        {
+            httpClient.PostAsync("http://192.168.1.125:8080/api/close", content);
+        }
+
+
+
+
+
+
 
         /*
         class Color

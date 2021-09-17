@@ -1,63 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IotProject</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
-    
-    <div class="container">
-        <div class="jumbotron text-center">
-            <h1>RGB LED CONTROL</h1>
+
+
+    <div class="container" id="cont">
+        <div class="row" id="row1">
+
+            <div class="jumbotron text-center">
+                <h2><b>TEMACITY DATA TABLE</b></h2>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="row" id="row3">
+                <div class="col-md-2  col-sm-2">
+                    <div class="jumbotron text-center">
+                        <button id="AllData" type="button" class="btn btn-light">All Data</button>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-3">
+                    <div class="jumbotron text-center">
+                        <button id="SequentialData" type="button" class="btn btn-dark">Sequential Data</button>
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-sm-2">
+                    <div class="jumbotron text-center">
+                        <button id="Running" type="button" class="btn btn-primary ">Running</button>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-3">
+                    <div class="jumbotron text-center">
+                        <button id="Failure" type="button" class="btn btn-danger ">Failure</button>
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-sm-2">
+                    <div class="jumbotron text-center">
+                        <button id="Success" type="button" class="btn btn-success">Success</button>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div id="output" onscroll="TableScroll()" >
+                    <table id="tbl" >
+                        <tr class="t-header">
+                            <th>Build Id</th>
+                            <th>Triggered</th>
+                            <th>Name</th>
+                            <th>Event</th>
+                            <th>Resualt</th>
+                            <th>Date</th>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
         </div>
         <br>
-        <div class="row">
+        <div class="row" id="row2">
 
+            <div class="jumbotron text-center">
+                <h1><b>RGB LED CONTROL</b></h1>
+            </div>
+            <br>
+            <br>
             <div class="col-md-3 col-sm-6">
                 <div class="jumbotron text-center">
-                    <button id="Yesil" type="button" class="btn"><img src="image/green.png"> </button>
+                    <button id="Green" type="button" class="btn"><img src="image/green.png"> </button>
                     <br>
-                    <div id="g"><h4>Green</h4></div>
+                    <div id="g">
+                        <h4>Green</h4>
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-3 col-sm-6">
                 <div class="jumbotron text-center">
-                    <button id="Kirmizi" type="button" class="btn "><img src="image/red.png"></button>
+                    <button id="Red" type="button" class="btn "><img src="image/red.png"></button>
                     <br>
-                    <div id="r"><h4>Red</h4></div>
+                    <div id="r">
+                        <h4>Red</h4>
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-3 col-sm-6">
                 <div class="jumbotron text-center">
-                    <button id="Mavi" type="button" class="btn"><img src="image/blue.png"></button>
+                    <button id="Blue" type="button" class="btn"><img src="image/blue.png"></button>
                     <br>
-                    <div id="b"><h4>Blue</h4></div>
+                    <div id="b">
+                        <h4>Blue</h4>
+                    </div>
                 </div>
             </div>
-            
+
             <div class="col-md-3 col-sm-6">
                 <div class="jumbotron text-center">
-                    <button id="Kapat" type="button" class="btn"><img src="image/close.png"></button>
+                    <button id="Close" type="button" class="btn"><img src="image/close.png"></button>
                     <br>
-                    <div id="c"><h4>Close</h4></div>
+                    <div id="c">
+                        <h4>Close</h4>
+                    </div>
                 </div>
             </div>
 
         </div>
-    </div>
-    <br>
-    <br>
-    <div id="output">
 
     </div>
+
 
     <script src="IotProject.js"></script>
 </body>
+
 </html>

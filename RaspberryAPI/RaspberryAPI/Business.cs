@@ -24,43 +24,43 @@ namespace RaspberryAPI
             controller.OpenPin(pin3, PinMode.Output);
         }
         
-        public void LedYesil()
+        public void LedGreen()
         {
             controller.Write(pin1, PinValue.High);
             controller.Write(pin2, PinValue.Low);
             controller.Write(pin3, PinValue.High);
         }
-        public void LedKirmizi()
+        public void LedRed()
         {
             controller.Write(pin1, PinValue.High);
             controller.Write(pin2, PinValue.High);
             controller.Write(pin3, PinValue.Low);
         }
 
-        public void LedMavi()
+        public void LedBlue()
         {
             controller.Write(pin1, PinValue.Low);
-            controller.Write(pin2, PinValue.Low);
+            controller.Write(pin2, PinValue.High);
             controller.Write(pin3, PinValue.High);
         }
 
         public void LedRun()
         {
-            controller.Write(pin2, PinValue.Low);
-            controller.Write(pin1, PinValue.Low);
+            controller.Write(pin2, PinValue.High);
+            controller.Write(pin3, PinValue.High);
             for (int i = 0; i < 5;i++) 
             {
-                controller.Write(pin3, PinValue.High);
+                controller.Write(pin1, PinValue.Low);
                 Thread.Sleep(1000);
-                controller.Write(pin3, PinValue.Low);
+                controller.Write(pin1, PinValue.High);
                 Thread.Sleep(1000);
             }
         }
-        public void LedKapat()
+        public void LedClose()
         {
-            controller.Write(pin1, PinValue.Low);
-            controller.Write(pin2, PinValue.Low);
-            controller.Write(pin3, PinValue.Low);
+            controller.Write(pin1, PinValue.High);
+            controller.Write(pin2, PinValue.High);
+            controller.Write(pin3, PinValue.High);
         }
     }
 }

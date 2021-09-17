@@ -10,7 +10,13 @@ body {
     max-width: 800px;
     padding: 2em 2em 4em;
 }
+
 h1{
+    color:darkorange;
+    text-align: center;
+}
+
+h2{
     color:darkorange;
     text-align: center;
 }
@@ -20,6 +26,10 @@ img{
     height: 75px;
 }
 
+img:hover{
+    transform: scale(1.2);
+    
+}
 #g{
    color:green;
 }
@@ -35,3 +45,64 @@ img{
  #c{
     color:black;
  }
+
+
+ table{
+        border-collapse: collapse;
+        width: 100%;
+ }
+
+table,th,td{
+     border-bottom:  0.5px solid black;
+     border-left:  0.5px solid black;
+     border-right:  0.5px solid black;
+ }
+ 
+ th{
+     height: 30px;
+     text-align: center;
+     color: darkorange;
+ }
+
+ td{
+    height: 40px;
+    text-align: center;
+}
+
+tr:hover{
+    background-color: white;
+}
+
+tr:nth-child(even){
+    color: #191919;
+}
+
+tr:nth-child(odd){
+    color: #191919;
+}
+
+#output{
+    height: 350px;
+    overflow: auto;
+}
+
+#tbl th{
+    background-color: #191919;
+    position:sticky;
+    top:0;
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+    background-color:#6a6a6a;
+    border-left: 1px solid #6a6a6a;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #3f3f3f;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #2c2c2c;
+}
+
+
+

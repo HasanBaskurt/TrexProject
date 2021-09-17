@@ -20,25 +20,25 @@ namespace RaspberryAPI.Controllers
         }
         
         [HttpPost]
-        [Route("yesil")]
-        public void LedYesilPost()
+        [Route("green")]
+        public void LedGreenPost()
         {
-            business.LedYesil();
+            business.LedGreen();
         }
 
         
         [HttpPost]
-        [Route("kirmizi")]
-        public void LedKirmiziPost()
+        [Route("red")]
+        public void LedRedPost()
         {
-            business.LedKirmizi();
+            business.LedRed();
         }
 
         [HttpPost]
-        [Route("mavi")]
-        public void LedMaviPost()
+        [Route("blue")]
+        public void LedBluePost()
         {
-            business.LedMavi();
+            business.LedBlue();
         }
         [HttpPost]
         [Route("run")]
@@ -47,10 +47,10 @@ namespace RaspberryAPI.Controllers
             business.LedRun();
         }
         [HttpPost]
-        [Route("kapat")]
-        public void LedKapatPost()
+        [Route("close")]
+        public void LedClosePost()
         {
-            business.LedKapat();
+            business.LedClose();
         }
     }
 }
