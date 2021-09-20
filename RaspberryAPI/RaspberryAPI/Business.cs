@@ -13,6 +13,7 @@ namespace RaspberryAPI
         int pin1 = 2;
         int pin2 = 3;
         int pin3 = 4;
+        int pin21 = 21;
         GpioController controller = new GpioController();
 
 
@@ -22,6 +23,7 @@ namespace RaspberryAPI
             controller.OpenPin(pin1, PinMode.Output);
             controller.OpenPin(pin2, PinMode.Output);
             controller.OpenPin(pin3, PinMode.Output);
+            controller.OpenPin(pin21, PinMode.Output);
         }
         
         public void LedGreen()
@@ -56,11 +58,23 @@ namespace RaspberryAPI
                 Thread.Sleep(1000);
             }
         }
+
         public void LedClose()
         {
             controller.Write(pin1, PinValue.High);
             controller.Write(pin2, PinValue.High);
             controller.Write(pin3, PinValue.High);
+        }
+
+        public void SocketOpen()
+        {
+            controller.Write(pin21, true);
+
+        }
+
+        public void SocketClose()
+        {
+            controller.Write(pin21, false);
         }
     }
 }

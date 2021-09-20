@@ -52,5 +52,26 @@ namespace RaspberryAPI.Controllers
         {
             business.LedClose();
         }
+
+        [HttpGet]
+        [Route("socket")]
+        public string socketOpenGet()
+        {
+           return "socket open";
+        }
+
+        [HttpPost]
+        [Route("socketOpen")]
+        public void SocketOpenPost()
+        {
+            business.SocketOpen();
+        }
+
+        [HttpPost]
+        [Route("socketClose")]
+        public void SockeyClosePost()
+        {
+            business.SocketClose();
+        }
     }
 }

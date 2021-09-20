@@ -88,6 +88,22 @@ namespace IotProject.API.Controllers
             httpClient.PostAsync("http://192.168.1.125:8080/api/close", content);
         }
 
+       
+
+        [HttpPost]
+        [Route("socketOpen")]
+        public void PostSocketOpen()
+        {
+            httpClient.PostAsync("http://192.168.1.125:8080/api/socketOpen", content);
+        }
+
+        [HttpPost]
+        [Route("socketClose")]
+        public void PostSocketClose()
+        {
+            httpClient.PostAsync("http://192.168.1.125:8080/api/socketClose", content);
+        }
+
 
 
 

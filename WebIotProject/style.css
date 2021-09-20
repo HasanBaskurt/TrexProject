@@ -34,6 +34,10 @@ img:hover{
    color:green;
 }
 
+#o{
+    color:white;
+ }
+
 #r{
     color:red;
  }
@@ -46,7 +50,14 @@ img:hover{
     color:black;
  }
 
-
+#SocketOpen img{
+    height: 50px;
+    width: 50px;
+}
+#SocketClose img{
+    height: 50px;
+    width: 50px;
+}
  table{
         border-collapse: collapse;
         width: 100%;

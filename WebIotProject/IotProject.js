@@ -27,6 +27,14 @@ document.querySelector("#Close").addEventListener("click", function () {
     colorChanger();
 });
 
+document.querySelector("#SocketOpen").addEventListener("click", function () {
+    colorChanger('socketOpen');
+});
+
+document.querySelector("#SocketClose").addEventListener("click", function () {
+    colorChanger('socketClose');
+});
+
 
 
 
@@ -131,24 +139,30 @@ const teamcityTableAllGet = async () => {
 
 //Table Button
 
+var tableValue;
 document.querySelector("#AllData").addEventListener("click", function () {
     TableSection('allData');
+    tableValue="allData";
 });
 
 document.querySelector("#SequentialData").addEventListener("click", function () {
     TableSection('sequentialData');
+    tableValue="sequentialData";
 });
 
 document.querySelector("#Running").addEventListener("click", function () {
     TableSection('running');
+    tableValue="running";
 });
 
 document.querySelector("#Failure").addEventListener("click", function () {
     TableSection('failure');
+    tableValue="failure";
 });
 
 document.querySelector("#Success").addEventListener("click", function () {
     TableSection('success');
+    tableValue="success";
 });
 
 
@@ -156,7 +170,7 @@ document.querySelector("#Success").addEventListener("click", function () {
 let t_header = ` <tr class="t-header">
 <th>Build Id</th>
 <th>Triggered</th>
-<th>Name</th>
+<th>Project Name</th>
 <th>Event</th>
 <th>Resualt</th>
 <th>Date</th>
@@ -189,7 +203,7 @@ function TableSection(tblSection) {
 }
 
 teamcityTableAllGet();
-
+tableValue="allData";
 /*
 teamcityTableGet("running");
 teamcityTableGet("failure");
@@ -207,11 +221,45 @@ function TableScroll()
 
 
 const refreshTable= async ()=>{ 
-    tempScrollSize=scrollSize;
-    teamcityTable.innerHTML = t_header;
-    await teamcityTableAllGet();
-    console.log(tempScrollSize);
-    outputScroll.scrollTop=tempScrollSize;
+    
+    if (tableValue == "running") {
+        tempScrollSize=scrollSize;
+        teamcityTable.innerHTML = t_header;
+        await teamcityTableGet("running");
+        console.log(tempScrollSize);
+        outputScroll.scrollTop=tempScrollSize;
+    }
+    else if (tableValue == "failure") {
+        tempScrollSize=scrollSize;
+        teamcityTable.innerHTML = t_header;
+        await teamcityTableGet("failure");
+        console.log(tempScrollSize);
+        outputScroll.scrollTop=tempScrollSize;
+    }
+    else if (tableValue == "success") {
+        tempScrollSize=scrollSize;
+        teamcityTable.innerHTML = t_header;
+        await teamcityTableGet("success");
+        console.log(tempScrollSize);
+        outputScroll.scrollTop=tempScrollSize;
+    }
+    else if (tableValue == "allData") {
+        tempScrollSize=scrollSize;
+        teamcityTable.innerHTML = t_header;
+        await teamcityTableAllGet();
+        console.log(tempScrollSize);
+        outputScroll.scrollTop=tempScrollSize;
+    }
+    
+    else if (tableValue == "sequentialData") {
+        tempScrollSize=scrollSize;
+        teamcityTable.innerHTML = t_header;
+        await teamcityTableGet("running");
+        await teamcityTableGet("failure");
+        await teamcityTableGet("success");
+        console.log(tempScrollSize);
+        outputScroll.scrollTop=tempScrollSize;
+    }
 
 }
 
