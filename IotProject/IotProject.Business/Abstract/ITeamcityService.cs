@@ -12,4 +12,9 @@ namespace IotProject.Business.Abstract
         List<Teamcity> GetAllTeamcity();
         Teamcity CreateTeamcity(Teamcity teamcity);
     }
+
+    public static class TeamcityList {
+        public static List<Teamcity> teamcityList = new List<Teamcity>();
+    }
+
 }

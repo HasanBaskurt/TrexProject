@@ -18,12 +18,13 @@ namespace IotProject.API.Controllers
     public class TeamcitiesController : ControllerBase
     {
         private ITeamcityService _teamcityService;
-        HttpClient httpClient; //yeni
-        StringContent content; //yeni
+        HttpClient httpClient; //new
+        StringContent content; //new // r-f-s list create
+        int failureCounter=0;
         public TeamcitiesController(ITeamcityService teamcityService)
         {
             _teamcityService = teamcityService;
-            httpClient = new HttpClient(); //yeni
+            httpClient = new HttpClient(); //new
             content = new StringContent(JsonConvert.SerializeObject(""), Encoding.UTF8, "application/json");
         }
 
@@ -42,23 +43,59 @@ namespace IotProject.API.Controllers
             
             if(teamcity.build_result== "failure")
             {
-                httpClient.PostAsync("http://192.168.1.125:8080/api/close", content);
-                httpClient.PostAsync("http://192.168.1.125:8080/api/red", content);
+                failureCounter++;
+                var teamcityValue = TeamcityList.teamcityList.Where(t => t.build_number == teamcity.build_number).FirstOrDefault();
+                if (teamcityValue != null)
+                {
+                    TeamcityList.teamcityList.Remove(teamcityValue);
+                }
+                //httpClient.PostAsync("http://192.168.1.125:8080/api/close", content);
+                //httpClient.PostAsync("http://192.168.1.125:8080/api/red", content);
             }
+
             else if (teamcity.build_result == "success")
+            {
+                var teamcityValue = TeamcityList.teamcityList.Where(t => t.build_number == teamcity.build_number).FirstOrDefault();
+                if (teamcityValue != null)
+                {
+                    TeamcityList.teamcityList.Remove(teamcityValue);
+                }
+                //httpClient.PostAsync("http://192.168.1.125:8080/api/close", content);
+                //httpClient.PostAsync("http://192.168.1.125:8080/api/green", content);
+
+            }
+
+            else if (teamcity.build_result == "running")
+            {
+                TeamcityList.teamcityList.Add(teamcity); // The running added to list
+                httpClient.PostAsync("http://192.168.1.125:8080/api/close", content);
+                httpClient.PostAsync("http://192.168.1.125:8080/api/blue", content);
+            }
+
+            if(TeamcityList.teamcityList.Count==0 && failureCounter == 0)
             {
                 httpClient.PostAsync("http://192.168.1.125:8080/api/close", content);
                 httpClient.PostAsync("http://192.168.1.125:8080/api/green", content);
-
             }
-            else if (teamcity.build_result == "running")
+
+            else if (TeamcityList.teamcityList.Count == 0 && failureCounter != 0)
             {
                 httpClient.PostAsync("http://192.168.1.125:8080/api/close", content);
-                httpClient.PostAsync("http://192.168.1.125:8080/api/run", content);
+                httpClient.PostAsync("http://192.168.1.125:8080/api/red", content);
+                failureCounter = 0;
             }
 
             return _teamcityService.CreateTeamcity(teamcity);
         }
+
+        //Get list teamcity
+        [HttpGet]
+        [Route("list")]
+        public List<Teamcity> GetList()
+        {
+            return TeamcityList.teamcityList;
+        }
+
 
         [HttpPost]
         [Route("green")]
