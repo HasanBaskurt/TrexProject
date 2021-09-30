@@ -41,6 +41,52 @@ document.querySelector("#SocketClose").addEventListener("click", function () {
 
 const teamcityTable = document.querySelector("#tbl");
 
+//Current Data
+const teamcityTableCurrentGet = async () => {
+    return await fetch(url + "list", {
+        method: 'get'
+    })
+        .then(response => response.json())
+        .then(teamcity => {
+            teamcity.forEach(_teamcity => {
+                let tr = document.createElement("tr");
+                let id = document.createElement("td");
+                let triggered = document.createElement("td");
+                let name = document.createElement("td");
+                let event = document.createElement("td");
+                let result = document.createElement("td");
+                let date=document.createElement("td");
+
+                id.textContent = _teamcity.id;
+                triggered.textContent = _teamcity.triggered_by;
+                name.textContent = _teamcity.build_name;
+                event.textContent = _teamcity.build_event;
+                result.textContent = _teamcity.build_result;
+                date.textContent= _teamcity.build_start_time;
+
+                tr.appendChild(id);
+                tr.appendChild(triggered);
+                tr.appendChild(name);
+                tr.appendChild(event);
+                tr.appendChild(result);
+                tr.appendChild(date);
+                teamcityTable.appendChild(tr);
+
+                // Table coloring
+                if (result.textContent == "running")
+                    tr.style.backgroundColor = "#87CEFA";
+
+                else if (result.textContent == "failure")
+                    tr.style.backgroundColor = "#ff3b1f";
+
+                else if (result.textContent == "success")
+                    tr.style.backgroundColor = "#2b961f";
+            });
+            document.getElementById("output").innerHTML;
+            return true;
+        });
+}
+//Filter Data
 const teamcityTableGet = async (buildResult) => {
     return await fetch(url + "BuildLog", {
         method: 'get'
@@ -92,6 +138,7 @@ const teamcityTableGet = async (buildResult) => {
 
 }
 
+//All Data
 const teamcityTableAllGet = async () => {
     return await fetch(url + "BuildLog", {
         method: 'get'
@@ -150,6 +197,11 @@ document.querySelector("#SequentialData").addEventListener("click", function () 
     tableValue="sequentialData";
 });
 
+document.querySelector("#Lastest").addEventListener("click", function () {
+    TableSection('lastest');
+    tableValue="lastest";
+});
+
 document.querySelector("#Running").addEventListener("click", function () {
     TableSection('running');
     tableValue="running";
@@ -198,6 +250,11 @@ function TableSection(tblSection) {
         teamcityTableGet("running");
         teamcityTableGet("failure");
         teamcityTableGet("success");
+    }
+
+    else if (tblSection == "lastest") {
+        teamcityTable.innerHTML = t_header;
+        teamcityTableCurrentGet();
     }
 
 }
@@ -257,6 +314,14 @@ const refreshTable= async ()=>{
         await teamcityTableGet("running");
         await teamcityTableGet("failure");
         await teamcityTableGet("success");
+        console.log(tempScrollSize);
+        outputScroll.scrollTop=tempScrollSize;
+    }
+
+    else if (tableValue == "lastest") {
+        tempScrollSize=scrollSize;
+        teamcityTable.innerHTML = t_header;
+        await teamcityTableCurrentGet();
         console.log(tempScrollSize);
         outputScroll.scrollTop=tempScrollSize;
     }

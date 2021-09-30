@@ -1,16 +1,26 @@
+// ignore_for_file: prefer_const_constructors, unnecessary_null_comparison, avoid_web_libraries_in_flutter, unused_import
+
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:iot_project/apis/api.dart';
+import 'package:iot_project/buttons/socketButtons.dart';
+import 'package:iot_project/buttons/tableButtons.dart';
+import 'package:iot_project/buttons/rgbLedButtons.dart';
+import 'package:iot_project/model/teamcityData.dart';
 
 class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: "IOT PROJECT",
         home: Scaffold(
           appBar: AppBar(
-            backgroundColor:Color(0xff2c2c2c),
+            backgroundColor: Color(0xff2c2c2c),
             title: Text("IOT PROJECT"),
             centerTitle: true,
             shadowColor: Colors.red,
@@ -19,6 +29,7 @@ class Home extends StatelessWidget {
         ));
   }
 }
+
 class appFunc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -26,93 +37,186 @@ class appFunc extends StatelessWidget {
       child: Container(
           alignment: Alignment.center,
           padding: EdgeInsets.only(top: 20.0),
-          color:Color(0xff2c2c2c),
+          color: Color(0xff2c2c2c),
           child: Column(
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                textDirection: TextDirection.ltr,
-                children: <Widget>[
-                  Text(
-                    'RGB LED CONTROL',
-                    style: TextStyle(
-                      fontFamily: 'Satisfy',
-                      fontSize: 20,
-                      color: Colors.orange,
+              // ignore: avoid_unnecessary_containers
+              Container(
+                height: 415,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            textDirection: TextDirection.ltr,
+                            children: const <Widget>[
+                              Text(
+                                'TEAMCITY DATA TABLE',
+                                style: TextStyle(
+                                  fontFamily: 'Satisfy',
+                                  fontSize: 20,
+                                  color: Colors.orange,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                textDirection: TextDirection.ltr,
-                children: <Widget>[
-                  Directionality(
-                    child: GreenLedButton(),
-                    textDirection: TextDirection.ltr,
-                  ),
-                  Directionality(
-                    child: RedLedButton(),
-                    textDirection: TextDirection.ltr,
-                  ),
-                  Directionality(
-                    child: BlueLedButton(),
-                    textDirection: TextDirection.ltr,
-                  ),
-                  Directionality(
-                    child: CloseLedButton(),
-                    textDirection: TextDirection.ltr,
-                  ),
-                ],
-              ),
-               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                textDirection: TextDirection.ltr,
-                children: <Widget>[
-                  Directionality(
-                    child: Text(''),
-                    textDirection: TextDirection.ltr,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                textDirection: TextDirection.ltr,
-                children: <Widget>[
-                  Text(
-                    'SOCKET CONTROLLER',
-                    style: TextStyle(
-                      fontFamily: 'Satisfy',
-                      fontSize: 20,
-                      color: Colors.orange,
+                    //Data Table
+                    Container(
+                      margin: EdgeInsets.only(bottom: 10.0),
+                      height: 265,
+                      color: Color(0xff191919),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          TeamcityListApp(),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    Container(
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            textDirection: TextDirection.ltr,
+                            children: const <Widget>[
+                              Directionality(
+                                child: AllDataButton(),
+                                textDirection: TextDirection.ltr,
+                              ),
+                              Directionality(
+                                child: SequentialButton(),
+                                textDirection: TextDirection.ltr,
+                              ),
+                              Directionality(
+                                child: LastestButton(),
+                                textDirection: TextDirection.ltr,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            textDirection: TextDirection.ltr,
+                            children: const <Widget>[
+                              Directionality(
+                                child: RunningButton(),
+                                textDirection: TextDirection.ltr,
+                              ),
+                              Directionality(
+                                child: FailureButton(),
+                                textDirection: TextDirection.ltr,
+                              ),
+                              Directionality(
+                                child: SuccessButton(),
+                                textDirection: TextDirection.ltr,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                textDirection: TextDirection.ltr,
-                children: <Widget>[
-                  
-                  Directionality(
-                    child: Text(''),
-                    textDirection: TextDirection.ltr,
-                  ),
-                  Directionality(
-                    child: SocketOpenButton(),
-                    textDirection: TextDirection.ltr,
-                    
-                  ),
-                  Directionality(
-                    child: SocketCloseButton(),
-                    textDirection: TextDirection.ltr,
-                  ),
-                  Directionality(
-                    child: Text(''),
-                    textDirection: TextDirection.ltr,
-                  ),
-                ],
+              // ignore: avoid_unnecessary_containers
+              Container(
+                height: 280,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      height: 140.0,
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            textDirection: TextDirection.ltr,
+                            children: const <Widget>[
+                              Text(
+                                'RGB LED CONTROL',
+                                style: TextStyle(
+                                  fontFamily: 'Satisfy',
+                                  fontSize: 20,
+                                  color: Colors.orange,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            textDirection: TextDirection.ltr,
+                            children: const <Widget>[
+                              Directionality(
+                                child: GreenLedButton(),
+                                textDirection: TextDirection.ltr,
+                              ),
+                              Directionality(
+                                child: RedLedButton(),
+                                textDirection: TextDirection.ltr,
+                              ),
+                              Directionality(
+                                child: BlueLedButton(),
+                                textDirection: TextDirection.ltr,
+                              ),
+                              Directionality(
+                                child: CloseLedButton(),
+                                textDirection: TextDirection.ltr,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 140.0,
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            textDirection: TextDirection.ltr,
+                            children: const <Widget>[
+                              Text(
+                                'SOCKET CONTROLLER',
+                                style: TextStyle(
+                                  fontFamily: 'Satisfy',
+                                  fontSize: 20,
+                                  color: Colors.orange,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            textDirection: TextDirection.ltr,
+                            children: const <Widget>[
+                              Directionality(
+                                child: Text(''),
+                                textDirection: TextDirection.ltr,
+                              ),
+                              Directionality(
+                                child: SocketOpenButton(),
+                                textDirection: TextDirection.ltr,
+                              ),
+                              Directionality(
+                                child: SocketCloseButton(),
+                                textDirection: TextDirection.ltr,
+                              ),
+                              Directionality(
+                                child: Text(''),
+                                textDirection: TextDirection.ltr,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           )),
@@ -120,182 +224,95 @@ class appFunc extends StatelessWidget {
   }
 }
 
-// Green Led Post
-  greenLed() async {
-    try {
-      var response = await http
-          .post(Uri.parse("http://10.0.2.2:5000/api/green"), body: {}).then((value) {
-     print(value);
- }, onError: (error) {
-     print(error);
-  });
-         
-    } catch (e) {
-      print(e);
-    }
-  }
+// Teamcity Data Table
+class TeamcityListApp extends StatefulWidget {
+  const TeamcityListApp({Key? key}) : super(key: key);
 
-  // Red Led Post
-  redLed() async {
-    try {
-      var response = await http
-          .post(Uri.parse("http://10.0.2.2:5000/api/red"), body: {});
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  // Blue Led Post
-  blueLed() async {
-    try {
-      var response = await http
-          .post(Uri.parse("http://10.0.2.2:5000/api/blue"), body: {});
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  // Close Led Post
-  closeLed() async {
-    try {
-      var response = await http
-          .post(Uri.parse("http://10.0.2.2:5000/api/close"), body: {});
-    } catch (e) {
-      print(e);
-    }
-  }
-
-//SOCKET POST CONTROL
-  // Close Led Post
-  socketOn() async {
-    try {
-      var response = await http
-          .post(Uri.parse("http://10.0.2.2:5000/api/socketOpen"), body: {});
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  // Close Led Post
-  socketOff() async {
-    try {
-      var response = await http
-          .post(Uri.parse("http://10.0.2.2:5000/api/socketClose"), body: {});
-    } catch (e) {
-      print(e);
-    }
-  }
-
-//RGB LED BUTTONS
-class GreenLedButton extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    var button = Container(
-      width:80.0,
-      height: 80.0,
-      margin: EdgeInsets.all(5),
-      // ignore: deprecated_member_use
-      child: RaisedButton(
-        child: Image.asset('images/green.png'),
-        onPressed: greenLed,
-        color: Color(0xff2c2c2c),
-      ),
-    );
-    return button;
-  }
+  State<StatefulWidget> createState() => TeamcityListAppState();
 }
 
-class RedLedButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var button = Container(
-      width:80.0,
-      height: 80.0,
-      margin: EdgeInsets.all(5),
-      // ignore: deprecated_member_use
-      child: RaisedButton(
-        child: Image.asset('images/red.png'),
-        onPressed: redLed,
-        color: Color(0xff2c2c2c),
-      ),
-    );
-    return button;
+class TeamcityListAppState extends State<TeamcityListApp> {
+  List<TeamcityData> itemList = [];
+  getTeamcity() {
+    Api.getTeamcities().then((response) {
+      setState(() {
+        var dataList = json.decode(response.body);
+        for (var i = 0; i < dataList.length; i++) {
+          itemList.add(TeamcityData.fromJson(dataList[i]));
+        }
+      });
+    });
   }
-}
 
-class BlueLedButton extends StatelessWidget {
+  // ignore: deprecated_member_use
+  late List<TeamcityData> list;
   @override
   Widget build(BuildContext context) {
-    var button = Container(
-      width:80.0,
-      height: 80.0,
-      margin: EdgeInsets.all(5),
-      // ignore: deprecated_member_use
-      child: RaisedButton(
-         child: Image.asset('images/blue.png'),
-        onPressed: blueLed,
-        color: Color(0xff2c2c2c),
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // ignore: sized_box_for_whitespace
+        Container(
+          height: 265.0,
+          child: ListView(
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                    headingRowColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.black),
+                    dataRowColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.yellow),
+                    // ignore: prefer_const_literals_to_create_immutables
+                    columns: [
+                      const DataColumn(
+                          label: Text(
+                        'Id',
+                        style: TextStyle(color: Colors.orange),
+                      )),
+                      const DataColumn(
+                          label: Text('Project Name',
+                              style: TextStyle(color: Colors.orange))),
+                      const DataColumn(
+                          label: Text(
+                        'Event',
+                        style: TextStyle(color: Colors.orange),
+                      )),
+                      const DataColumn(
+                          label: Text(
+                        'Result',
+                        style: TextStyle(color: Colors.orange),
+                      )),
+                      const DataColumn(
+                          label: Text(
+                        'Date',
+                        style: TextStyle(color: Colors.orange),
+                      )),
+                    ],
+
+                    /// ÖNEMLİ !!!!
+                    rows: List<DataRow>.generate(
+                      itemList.length,
+                      (index) => DataRow(cells: [
+                        DataCell(Text('${itemList[index].id}')),
+                        DataCell(Text('${itemList[index].build_name}')),
+                        DataCell(Text('${itemList[index].build_event}')),
+                        DataCell(Text('${itemList[index].build_result}')),
+                        DataCell(Text('${itemList[index].build_start_time}')),
+                      ]),
+                    )),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
-    return button;
   }
-}
 
-
-class CloseLedButton extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    var button = Container(
-      width:80.0,
-      height: 80.0,
-      margin: EdgeInsets.all(5),
-      
-      // ignore: deprecated_member_use
-      child: RaisedButton(
-        child: Image.asset('images/close.png'),
-        onPressed: closeLed,
-        color: Color(0xff2c2c2c),
-      ),
-    );
-    return button;
-  }
-}
-
-//SOCKET BUTTONS
-class SocketOpenButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var button = Container(
-      width:80.0,
-      height: 80.0,
-      margin: EdgeInsets.all(5),
-      // ignore: deprecated_member_use
-      child: RaisedButton(
-         child: Image.asset('images/SocketOn.png'),
-        onPressed: socketOn,
-        color: Color(0xff2c2c2c),
-      ),
-    );
-    return button;
-  }
-}
-
-
-class SocketCloseButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var button = Container(
-      width:80.0,
-      height: 80.0,
-      margin: EdgeInsets.all(5),
-      
-      // ignore: deprecated_member_use
-      child: RaisedButton(
-        child: Image.asset('images/SocketOff.png'),
-        onPressed: socketOff,
-        color: Color(0xff2c2c2c),
-      ),
-    );
-    return button;
+  void initState() {
+    super.initState();
+    getTeamcity();
   }
 }
