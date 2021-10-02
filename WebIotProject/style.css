@@ -10,7 +10,9 @@ body {
     max-width: 800px;
     padding: 2em 2em 4em;
 }
-
+#row5{
+    margin-top: 20px;
+}
 h1{
     color:darkorange;
     text-align: center;
@@ -70,7 +72,7 @@ table,th,td{
  }
  
  th{
-     height: 30px;
+     height: 40px;
      text-align: center;
      color: darkorange;
  }
@@ -98,7 +100,7 @@ tr:nth-child(odd){
 }
 
 #tbl th{
-    background-color: #191919;
+    background-color: black;
     position:sticky;
     top:0;
 }

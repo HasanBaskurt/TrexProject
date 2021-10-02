@@ -38,11 +38,11 @@ class appFunc extends StatelessWidget {
           alignment: Alignment.center,
           padding: EdgeInsets.only(top: 20.0),
           color: Color(0xff2c2c2c),
-          child: Column(
-            children: <Widget>[
+          child: ListView(
+            children: [
               // ignore: avoid_unnecessary_containers
               Container(
-                height: 415,
+                height: 435,
                 child: Column(
                   children: <Widget>[
                     Container(
@@ -67,9 +67,10 @@ class appFunc extends StatelessWidget {
                       ),
                     ),
                     //Data Table
+
                     Container(
                       margin: EdgeInsets.only(bottom: 10.0),
-                      height: 265,
+                      height: 285,
                       color: Color(0xff191919),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -234,16 +235,6 @@ class TeamcityListApp extends StatefulWidget {
 
 class TeamcityListAppState extends State<TeamcityListApp> {
   List<TeamcityData> itemList = [];
-  getTeamcity() {
-    Api.getTeamcities().then((response) {
-      setState(() {
-        var dataList = json.decode(response.body);
-        for (var i = 0; i < dataList.length; i++) {
-          itemList.add(TeamcityData.fromJson(dataList[i]));
-        }
-      });
-    });
-  }
 
   // ignore: deprecated_member_use
   late List<TeamcityData> list;
@@ -252,67 +243,105 @@ class TeamcityListAppState extends State<TeamcityListApp> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // ignore: sized_box_for_whitespace
-        Container(
-          height: 265.0,
-          child: ListView(
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: DataTable(
-                    headingRowColor: MaterialStateColor.resolveWith(
-                        (states) => Colors.black),
-                    dataRowColor: MaterialStateColor.resolveWith(
-                        (states) => Colors.yellow),
-                    // ignore: prefer_const_literals_to_create_immutables
-                    columns: [
-                      const DataColumn(
-                          label: Text(
-                        'Id',
-                        style: TextStyle(color: Colors.orange),
-                      )),
-                      const DataColumn(
-                          label: Text('Project Name',
-                              style: TextStyle(color: Colors.orange))),
-                      const DataColumn(
-                          label: Text(
-                        'Event',
-                        style: TextStyle(color: Colors.orange),
-                      )),
-                      const DataColumn(
-                          label: Text(
-                        'Result',
-                        style: TextStyle(color: Colors.orange),
-                      )),
-                      const DataColumn(
-                          label: Text(
-                        'Date',
-                        style: TextStyle(color: Colors.orange),
-                      )),
-                    ],
+        RefreshIndicator(
+            child: Container(
+              height: 285.0,
+              child: ListView(
+                children: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                        headingRowColor: MaterialStateColor.resolveWith(
+                            (states) => Colors.black),
+                        dataRowColor: MaterialStateColor.resolveWith(
+                            (states) => Colors.yellow),
+                        // ignore: prefer_const_literals_to_create_immutables
+                        columns: [
+                          const DataColumn(
+                              label: Text(
+                            'Build Id',
+                            style: TextStyle(color: Colors.orange),
+                          )),
+                          const DataColumn(
+                              label: Text('Project Name',
+                                  style: TextStyle(color: Colors.orange))),
+                          const DataColumn(
+                              label: Text(
+                            'Event',
+                            style: TextStyle(color: Colors.orange),
+                          )),
+                          const DataColumn(
+                              label: Text(
+                            'Result',
+                            style: TextStyle(color: Colors.orange),
+                          )),
+                          const DataColumn(
+                              label: Text(
+                            'Date',
+                            style: TextStyle(color: Colors.orange),
+                          )),
+                        ],
 
-                    /// ÖNEMLİ !!!!
-                    rows: List<DataRow>.generate(
-                      itemList.length,
-                      (index) => DataRow(cells: [
-                        DataCell(Text('${itemList[index].id}')),
-                        DataCell(Text('${itemList[index].build_name}')),
-                        DataCell(Text('${itemList[index].build_event}')),
-                        DataCell(Text('${itemList[index].build_result}')),
-                        DataCell(Text('${itemList[index].build_start_time}')),
-                      ]),
-                    )),
+                        /// ÖNEMLİ !!!!
+                        rows: List<DataRow>.generate(
+                          itemList.length,
+                          (index) => DataRow(
+                              color: MaterialStateProperty.resolveWith<Color>(
+                                  (Set<MaterialState> states) {
+                                if (itemList[index].build_result.toString() ==
+                                    "running")
+                                  // ignore: curly_braces_in_flow_control_structures
+                                  return Colors.lightBlueAccent;
+                                else if (itemList[index]
+                                        .build_result
+                                        .toString() ==
+                                    "failure")
+                                  // ignore: curly_braces_in_flow_control_structures
+                                  return Colors.red;
+                                else if (itemList[index]
+                                        .build_result
+                                        .toString() ==
+                                    // ignore: curly_braces_in_flow_control_structures
+                                    "success") return Color(0xff008000);
+
+                                return Colors.white; // Use the default value.
+                              }),
+                              cells: [
+                                DataCell(Text('${itemList[index].id}')),
+                                DataCell(Text('${itemList[index].build_name}')),
+                                DataCell(
+                                    Text('${itemList[index].build_event}')),
+                                DataCell(
+                                    Text('${itemList[index].build_result}')),
+                                DataCell(Text(
+                                    '${itemList[index].build_start_time}')),
+                              ]),
+                        )),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
+            onRefresh: refreshTeamcityData)
+        // ignore: sized_box_for_whitespace
       ],
     );
   }
 
   @override
   void initState() {
+    refreshTeamcityData();
     super.initState();
-    getTeamcity();
+  }
+
+  Future refreshTeamcityData() async {
+    Uri uri = Uri.parse('http://10.0.2.2:5000/api/buildLog');
+    final response = await http.get(uri);
+    var data = json.decode(response.body);
+    setState(() {
+      itemList.clear();
+      for (var i = 0; i < data.length; i++) {
+        itemList.add(TeamcityData.fromJson(data[i]));
+      }
+    });
   }
 }

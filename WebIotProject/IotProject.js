@@ -55,14 +55,14 @@ const teamcityTableCurrentGet = async () => {
                 let name = document.createElement("td");
                 let event = document.createElement("td");
                 let result = document.createElement("td");
-                let date=document.createElement("td");
+                let date = document.createElement("td");
 
                 id.textContent = _teamcity.id;
                 triggered.textContent = _teamcity.triggered_by;
                 name.textContent = _teamcity.build_name;
                 event.textContent = _teamcity.build_event;
                 result.textContent = _teamcity.build_result;
-                date.textContent= _teamcity.build_start_time;
+                date.textContent = _teamcity.build_start_time;
 
                 tr.appendChild(id);
                 tr.appendChild(triggered);
@@ -104,7 +104,7 @@ const teamcityTableGet = async (buildResult) => {
                     let name = document.createElement("td");
                     let event = document.createElement("td");
                     let result = document.createElement("td");
-                    let date= document.createElement("td");
+                    let date = document.createElement("td");
 
                     id.textContent = _teamcity.id;
                     triggered.textContent = _teamcity.triggered_by;
@@ -152,14 +152,14 @@ const teamcityTableAllGet = async () => {
                 let name = document.createElement("td");
                 let event = document.createElement("td");
                 let result = document.createElement("td");
-                let date=document.createElement("td");
+                let date = document.createElement("td");
 
                 id.textContent = _teamcity.id;
                 triggered.textContent = _teamcity.triggered_by;
                 name.textContent = _teamcity.build_name;
                 event.textContent = _teamcity.build_event;
                 result.textContent = _teamcity.build_result;
-                date.textContent= _teamcity.build_start_time;
+                date.textContent = _teamcity.build_start_time;
 
                 tr.appendChild(id);
                 tr.appendChild(triggered);
@@ -189,32 +189,32 @@ const teamcityTableAllGet = async () => {
 var tableValue;
 document.querySelector("#AllData").addEventListener("click", function () {
     TableSection('allData');
-    tableValue="allData";
+    tableValue = "allData";
 });
 
 document.querySelector("#SequentialData").addEventListener("click", function () {
     TableSection('sequentialData');
-    tableValue="sequentialData";
+    tableValue = "sequentialData";
 });
 
 document.querySelector("#Lastest").addEventListener("click", function () {
     TableSection('lastest');
-    tableValue="lastest";
+    tableValue = "lastest";
 });
 
 document.querySelector("#Running").addEventListener("click", function () {
     TableSection('running');
-    tableValue="running";
+    tableValue = "running";
 });
 
 document.querySelector("#Failure").addEventListener("click", function () {
     TableSection('failure');
-    tableValue="failure";
+    tableValue = "failure";
 });
 
 document.querySelector("#Success").addEventListener("click", function () {
     TableSection('success');
-    tableValue="success";
+    tableValue = "success";
 });
 
 
@@ -244,7 +244,7 @@ function TableSection(tblSection) {
         teamcityTable.innerHTML = t_header;
         teamcityTableAllGet();
     }
-    
+
     else if (tblSection == "sequentialData") {
         teamcityTable.innerHTML = t_header;
         teamcityTableGet("running");
@@ -260,7 +260,7 @@ function TableSection(tblSection) {
 }
 
 teamcityTableAllGet();
-tableValue="allData";
+tableValue = "allData";
 /*
 teamcityTableGet("running");
 teamcityTableGet("failure");
@@ -270,66 +270,65 @@ teamcityTableGet("success");*/
 var outputScroll = document.querySelector("#output");
 var scrollSize;
 var tempScrollSize;
-function TableScroll()
-{
-    scrollSize=outputScroll.scrollTop;
+function TableScroll() {
+    scrollSize = outputScroll.scrollTop;
 }
 
 
 
-const refreshTable= async ()=>{ 
-    
+const refreshTable = async () => {
+
     if (tableValue == "running") {
-        tempScrollSize=scrollSize;
+        tempScrollSize = scrollSize;
         teamcityTable.innerHTML = t_header;
         await teamcityTableGet("running");
         console.log(tempScrollSize);
-        outputScroll.scrollTop=tempScrollSize;
+        outputScroll.scrollTop = tempScrollSize;
     }
     else if (tableValue == "failure") {
-        tempScrollSize=scrollSize;
+        tempScrollSize = scrollSize;
         teamcityTable.innerHTML = t_header;
         await teamcityTableGet("failure");
         console.log(tempScrollSize);
-        outputScroll.scrollTop=tempScrollSize;
+        outputScroll.scrollTop = tempScrollSize;
     }
     else if (tableValue == "success") {
-        tempScrollSize=scrollSize;
+        tempScrollSize = scrollSize;
         teamcityTable.innerHTML = t_header;
         await teamcityTableGet("success");
         console.log(tempScrollSize);
-        outputScroll.scrollTop=tempScrollSize;
+        outputScroll.scrollTop = tempScrollSize;
     }
     else if (tableValue == "allData") {
-        tempScrollSize=scrollSize;
+        tempScrollSize = scrollSize;
         teamcityTable.innerHTML = t_header;
         await teamcityTableAllGet();
         console.log(tempScrollSize);
-        outputScroll.scrollTop=tempScrollSize;
+        outputScroll.scrollTop = tempScrollSize;
     }
-    
+
     else if (tableValue == "sequentialData") {
-        tempScrollSize=scrollSize;
+        tempScrollSize = scrollSize;
         teamcityTable.innerHTML = t_header;
         await teamcityTableGet("running");
         await teamcityTableGet("failure");
         await teamcityTableGet("success");
         console.log(tempScrollSize);
-        outputScroll.scrollTop=tempScrollSize;
+        outputScroll.scrollTop = tempScrollSize;
     }
 
     else if (tableValue == "lastest") {
-        tempScrollSize=scrollSize;
+        tempScrollSize = scrollSize;
         teamcityTable.innerHTML = t_header;
         await teamcityTableCurrentGet();
         console.log(tempScrollSize);
-        outputScroll.scrollTop=tempScrollSize;
+        outputScroll.scrollTop = tempScrollSize;
     }
 
 }
 
 
-setInterval(refreshTable, 5000);  
+setInterval(refreshTable, 5000);
 
 
 
