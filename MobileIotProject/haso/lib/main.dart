@@ -30,7 +30,6 @@ class TeamcityListApp extends StatefulWidget {
 class TeamcityListAppState extends State {
   List<TeamcityData> itemList = [];
   List<TeamcityData> lastList = [];
-  List<TeamcityData> runningList = [];
 
   // ignore: deprecated_member_use
   late List<TeamcityData> list;
@@ -109,6 +108,11 @@ class TeamcityListAppState extends State {
                                     'Result',
                                     style: TextStyle(color: Colors.orange),
                                   )),
+                                  const DataColumn(
+                                      label: Text(
+                                    'Date',
+                                    style: TextStyle(color: Colors.orange),
+                                  )),
                                 ],
 
                                 /// ÖNEMLİ !!!!
@@ -143,6 +147,8 @@ class TeamcityListAppState extends State {
                                             '${itemList[index].build_event}')),
                                         DataCell(Text(
                                             '${itemList[index].build_result}')),
+                                        DataCell(Text(
+                                            '${itemList[index].build_start_time}')),
                                       ]),
                                 )),
                           ),
@@ -203,6 +209,11 @@ class TeamcityListAppState extends State {
                                       'Result',
                                       style: TextStyle(color: Colors.orange),
                                     )),
+                                    const DataColumn(
+                                        label: Text(
+                                      'Date',
+                                      style: TextStyle(color: Colors.orange),
+                                    )),
                                   ],
 
                                   /// ÖNEMLİ !!!!
@@ -212,11 +223,14 @@ class TeamcityListAppState extends State {
                                         color: MaterialStateProperty
                                             .resolveWith<Color>(
                                                 (Set<MaterialState> states) {
+                                          if (index.isEven) {
+                                            return Colors.grey.withOpacity(0.3);
+                                          }
                                           if (itemList[index]
                                                   .build_result
                                                   .toString() ==
                                               "running")
-                                            return Colors.lightBlueAccent;
+                                            return Colors.blue;
                                           else if (itemList[index]
                                                   .build_result
                                                   .toString() ==
@@ -240,6 +254,8 @@ class TeamcityListAppState extends State {
                                               '${itemList[index].build_event}')),
                                           DataCell(Text(
                                               '${itemList[index].build_result}')),
+                                          DataCell(Text(
+                                              '${itemList[index].build_start_time}')),
                                         ]),
                                   )),
                             ),
@@ -247,7 +263,7 @@ class TeamcityListAppState extends State {
                         ),
                       ),
                     ),
-                    onRefresh: refreshTeamcityLastData)
+                    onRefresh: refreshTeamcityLastData),
               ],
             ),
           ),

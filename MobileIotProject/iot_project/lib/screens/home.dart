@@ -19,12 +19,17 @@ class Home extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: "IOT PROJECT",
         home: Scaffold(
-          appBar: AppBar(
+          /*appBar: AppBar(
             backgroundColor: Color(0xff2c2c2c),
-            title: Text("IOT PROJECT"),
+            title: Text(
+              "IOT PROJECT",
+              style: TextStyle(
+                color: Color(0xfffff8f4),
+              ),
+            ),
             centerTitle: true,
             shadowColor: Colors.red,
-          ),
+          ),*/
           body: appFunc(),
         ));
   }
@@ -36,17 +41,16 @@ class appFunc extends StatelessWidget {
     return Center(
       child: Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.only(top: 20.0),
+          padding: EdgeInsets.only(top: 5.0),
           color: Color(0xff2c2c2c),
           child: ListView(
             children: [
               // ignore: avoid_unnecessary_containers
               Container(
-                height: 435,
+                height: 550,
                 child: Column(
                   children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(bottom: 10),
+                    /*Container(
                       child: Column(
                         children: <Widget>[
                           Row(
@@ -65,13 +69,12 @@ class appFunc extends StatelessWidget {
                           ),
                         ],
                       ),
-                    ),
+                    ),*/
                     //Data Table
 
                     Container(
                       margin: EdgeInsets.only(bottom: 10.0),
-                      height: 285,
-                      color: Color(0xff191919),
+                      height: 540,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -79,7 +82,7 @@ class appFunc extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Container(
+                    /*Container(
                       child: Column(
                         children: <Widget>[
                           Row(
@@ -120,14 +123,14 @@ class appFunc extends StatelessWidget {
                           ),
                         ],
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ),
 
               // ignore: avoid_unnecessary_containers
               Container(
-                height: 280,
+                height: 310,
                 child: Column(
                   children: <Widget>[
                     Container(
@@ -151,29 +154,59 @@ class appFunc extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             textDirection: TextDirection.ltr,
-                            children: const <Widget>[
-                              Directionality(
-                                child: GreenLedButton(),
-                                textDirection: TextDirection.ltr,
+                            children: [
+                              Column(
+                                children: const <Widget>[
+                                  Directionality(
+                                    child: GreenLedButton(),
+                                    textDirection: TextDirection.ltr,
+                                  ),
+                                  Text("Green",
+                                      style: TextStyle(
+                                          color: Colors.green, fontSize: 18)),
+                                ],
                               ),
-                              Directionality(
-                                child: RedLedButton(),
-                                textDirection: TextDirection.ltr,
+                              Column(
+                                children: const <Widget>[
+                                  Directionality(
+                                    child: RedLedButton(),
+                                    textDirection: TextDirection.ltr,
+                                  ),
+                                  Text("Red",
+                                      style: TextStyle(
+                                          color: Colors.red, fontSize: 18)),
+                                ],
                               ),
-                              Directionality(
-                                child: BlueLedButton(),
-                                textDirection: TextDirection.ltr,
+                              Column(
+                                children: const <Widget>[
+                                  Directionality(
+                                    child: BlueLedButton(),
+                                    textDirection: TextDirection.ltr,
+                                  ),
+                                  Text("Blue",
+                                      style: TextStyle(
+                                          color: Colors.blue, fontSize: 18)),
+                                ],
                               ),
-                              Directionality(
-                                child: CloseLedButton(),
-                                textDirection: TextDirection.ltr,
+                              Column(
+                                children: const <Widget>[
+                                  Directionality(
+                                    child: CloseLedButton(),
+                                    textDirection: TextDirection.ltr,
+                                  ),
+                                  Text("Close",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 18)),
+                                ],
                               ),
                             ],
                           ),
                         ],
                       ),
                     ),
+                    // ignore: sized_box_for_whitespace
                     Container(
+                      margin: EdgeInsets.only(top: 20),
                       height: 140.0,
                       child: Column(
                         children: <Widget>[
@@ -194,22 +227,44 @@ class appFunc extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             textDirection: TextDirection.ltr,
-                            children: const <Widget>[
-                              Directionality(
-                                child: Text(''),
-                                textDirection: TextDirection.ltr,
+                            children: [
+                              Column(
+                                children: [
+                                  Directionality(
+                                    child: Text(''),
+                                    textDirection: TextDirection.ltr,
+                                  ),
+                                ],
                               ),
-                              Directionality(
-                                child: SocketOpenButton(),
-                                textDirection: TextDirection.ltr,
+                              Column(
+                                children: [
+                                  Directionality(
+                                    child: SocketOpenButton(),
+                                    textDirection: TextDirection.ltr,
+                                  ),
+                                  Text("On",
+                                      style: TextStyle(
+                                          color: Colors.green, fontSize: 18)),
+                                ],
                               ),
-                              Directionality(
-                                child: SocketCloseButton(),
-                                textDirection: TextDirection.ltr,
+                              Column(
+                                children: [
+                                  Directionality(
+                                    child: SocketCloseButton(),
+                                    textDirection: TextDirection.ltr,
+                                  ),
+                                  Text("Off",
+                                      style: TextStyle(
+                                          color: Colors.red, fontSize: 18)),
+                                ],
                               ),
-                              Directionality(
-                                child: Text(''),
-                                textDirection: TextDirection.ltr,
+                              Column(
+                                children: [
+                                  Directionality(
+                                    child: Text(''),
+                                    textDirection: TextDirection.ltr,
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -235,6 +290,7 @@ class TeamcityListApp extends StatefulWidget {
 
 class TeamcityListAppState extends State<TeamcityListApp> {
   List<TeamcityData> itemList = [];
+  List<TeamcityData> lastList = [];
 
   // ignore: deprecated_member_use
   late List<TeamcityData> list;
@@ -243,6 +299,23 @@ class TeamcityListAppState extends State<TeamcityListApp> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Container(
+          margin: EdgeInsets.only(bottom: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            textDirection: TextDirection.ltr,
+            children: const <Widget>[
+              Text(
+                'TEAMCITY DATA TABLE',
+                style: TextStyle(
+                  fontFamily: 'Satisfy',
+                  fontSize: 20,
+                  color: Colors.orange,
+                ),
+              ),
+            ],
+          ),
+        ),
         RefreshIndicator(
             child: Container(
               height: 285.0,
@@ -321,7 +394,106 @@ class TeamcityListAppState extends State<TeamcityListApp> {
                 ],
               ),
             ),
-            onRefresh: refreshTeamcityData)
+            onRefresh: refreshTeamcityData),
+        Container(
+          margin: EdgeInsets.only(top: 15.0, bottom: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            textDirection: TextDirection.ltr,
+            children: const <Widget>[
+              Text(
+                'TEAMCITY LAST DATA TABLE',
+                style: TextStyle(
+                  fontFamily: 'Satisfy',
+                  fontSize: 20,
+                  color: Colors.orange,
+                ),
+              ),
+            ],
+          ),
+        ),
+        RefreshIndicator(
+            child: Container(
+              height: 150.0,
+              child: Center(
+                child: ListView(
+                  children: [
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: DataTable(
+                          headingRowColor: MaterialStateColor.resolveWith(
+                              (states) => Colors.black),
+                          dataRowColor: MaterialStateColor.resolveWith(
+                              (states) => Colors.white),
+                          // ignore: prefer_const_literals_to_create_immutables
+                          columns: [
+                            const DataColumn(
+                                label: Text(
+                              'Id',
+                              style: TextStyle(color: Colors.orange),
+                            )),
+                            const DataColumn(
+                                label: Text('Project Name',
+                                    style: TextStyle(color: Colors.orange))),
+                            const DataColumn(
+                                label: Text(
+                              'Event',
+                              style: TextStyle(color: Colors.orange),
+                            )),
+                            const DataColumn(
+                                label: Text(
+                              'Result',
+                              style: TextStyle(color: Colors.orange),
+                            )),
+                            const DataColumn(
+                                label: Text(
+                              'Date',
+                              style: TextStyle(color: Colors.orange),
+                            )),
+                          ],
+
+                          /// ÖNEMLİ !!!!
+                          rows: List<DataRow>.generate(
+                            lastList.length,
+                            (index) => DataRow(
+                                color: MaterialStateProperty.resolveWith<Color>(
+                                    (Set<MaterialState> states) {
+                                  if (itemList[index].build_result.toString() ==
+                                      "running")
+                                    // ignore: curly_braces_in_flow_control_structures
+                                    return Colors.lightBlueAccent;
+                                  else if (itemList[index]
+                                          .build_result
+                                          .toString() ==
+                                      "failure")
+                                    // ignore: curly_braces_in_flow_control_structures
+                                    return Colors.red;
+                                  else if (itemList[index]
+                                          .build_result
+                                          .toString() ==
+                                      // ignore: curly_braces_in_flow_control_structures
+                                      "success") return Color(0xff008000);
+
+                                  return Colors.white; // Use the default value.
+                                }),
+                                cells: [
+                                  DataCell(Text('${itemList[index].id}')),
+                                  DataCell(
+                                      Text('${itemList[index].build_name}')),
+                                  DataCell(
+                                      Text('${itemList[index].build_event}')),
+                                  DataCell(
+                                      Text('${itemList[index].build_result}')),
+                                  DataCell(Text(
+                                      '${itemList[index].build_start_time}')),
+                                ]),
+                          )),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            onRefresh: refreshTeamcityLastData)
         // ignore: sized_box_for_whitespace
       ],
     );
@@ -330,6 +502,7 @@ class TeamcityListAppState extends State<TeamcityListApp> {
   @override
   void initState() {
     refreshTeamcityData();
+    refreshTeamcityLastData();
     super.initState();
   }
 
@@ -341,6 +514,18 @@ class TeamcityListAppState extends State<TeamcityListApp> {
       itemList.clear();
       for (var i = 0; i < data.length; i++) {
         itemList.add(TeamcityData.fromJson(data[i]));
+      }
+    });
+  }
+
+  Future refreshTeamcityLastData() async {
+    Uri uri = Uri.parse('http://10.0.2.2:5000/api/list');
+    final response = await http.get(uri);
+    var data = json.decode(response.body);
+    setState(() {
+      lastList.clear();
+      for (var i = 0; i < data.length; i++) {
+        lastList.add(TeamcityData.fromJson(data[i]));
       }
     });
   }
